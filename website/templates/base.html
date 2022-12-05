@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/css/bootstrap-select.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/fontawesome.min.css"
+    /> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-select.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/fontawesome.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>{% block title %}Home{% endblock %}</title>
+  </head>
+  <body>
+    
+    <div class="container">
+      <h1 class="display-6 text-center">Conversion Calculator for Verbal Learning Test Scores
+</h1>
+      <br/>
+      <div class="row">
+        <div class="col-8">
+          <div class="col-7">
+          {% with messages = get_flashed_messages(with_categories=true) %} {% if
+          messages %} {% for category, message in messages %} {% if category ==
+          "error" %}
+          <div
+            class="alert alert-warning fade show"
+            role="alert"
+          >
+            {{ message }}
+            <button type="button" class="btn-close float-end" data-bs-dismiss="alert" aria-label="Close">
+            </button>
+          </div>
+          {% else %}
+          <div
+            class="alert alert-success alter-dismissable fade show"
+            role="alert"
+          >
+            {{message}}
+            <button type="button" class="btn-close float-end" data-bs-dismiss="alert">
+            </button>
+          </div>
+          {% endif %} {% endfor %} {% endif %} {% endwith %}
+          </div>
+          <form method="POST">
+            <div class="form-group-row col-3">
+              <select id="instrument_select" name="instrument_select" class="form-control form-select">
+                <option selected disabled>Instrument select</option>
+                <option value="cvlt">CVLT</option>
+                <option value="ravlt">RAVLT</option>
+                <option value="hvlt">HVLT</option>
+              </select>
+            </div>
+            <br/>
+            <div class="form-group-row col-3">
+              <select id="item_select" name="item_select" class="form-control form-select">
+                <option selected disabled>Item select</option>
+                <option value="trial 1">Trial 1</option>
+                <option value="total" id="total_score">Total Score of trials 1-5</option>
+                <option value="short delay">Short delay free recall</option>
+                <option value="long delay">Long delay free recall</option>
+              </select>
+            </div>
+            <br/>
+            <div class="form-group-row col-3">
+              <!-- <label for="formGroupExampleInput">Input Score</label> -->
+              <input
+                type="text"
+                class="form-control"
+                id="formGroupExampleInput"
+                name="score"
+                placeholder="Input score"
+              />
+            </div>
+            <br />
+            <a href="/">
+            <button type="submit" id="form-submit" class="btn btn-primary">Convert and Show Table</button>
+            </a>
+          </form>
+          <br/>
+          <div class="row">{% block output %} {% endblock %}</div>
+        </div>
+        <div class="col-4">
+          <div class="row">{% block content %} {% endblock %}</div>
+        </div>
+      </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/jquery-3.6.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap-select.min.js') }}"></script>
+    <!-- <script
+      src="https://code.jquery.com/jquery-3.6.1.min.js"
+      integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/js/bootstrap-select.min.js"></script> -->
+
+    <script src="{{url_for('static', filename='index.js')}}"></script>
+  </body>
+</html>

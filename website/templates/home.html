@@ -1,0 +1,111 @@
+{% extends "base.html" %} {% block title %}Calculator{% endblock %} {% block
+content %}
+{% if table.size > 0 %}
+<div class="table-responsive">
+  <table class="table table-md table-bordered table-hover border border-3 table-rounded">
+    <caption class="caption-top text-center">
+      {{ instrument }} conversion table
+    </caption>
+    <thead>
+      <tr class="table-secondary">
+        <th scope="col">{{h1}}</th>
+        <th scope="col">{{h2}}</th>
+        {% if item != "Short Delay" %}
+        <th scope="col">{{h3}}</th>
+        {% endif %}
+      </tr>
+    </thead>
+    <tbody>
+        
+      {% for row in table %}
+      <tr>
+        <td class="fw-bold border-end">{{row[0]}}</td>
+        <td class="border-end">{{row[1]}}</td>
+        {% if item != "Short Delay" %}
+        <td>{{row[2]}}</td>
+        {% endif %}
+      </tr>
+      {% endfor %}
+      
+    </tbody>
+  </table>
+</div>
+{% endif %}
+<!-- <div class="table-responsive col-4">
+  <table class="table table-sm table-bordered table-hover">
+    <caption class="caption-top">
+      RAVLT conversion table
+    </caption>
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">Measured Score RAVLT Total T1-T5</th>
+        <th scope="col">Estimated HVLT total</th>
+        <th scope="col">Estimated CVLT total</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in table2 %}
+      <tr>
+        <td>{{row[0]}}</td>
+        <td>{{row[1]}}</td>
+        <td>{{row[2]}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<div class="table-responsive col-4">
+  <table class="table table-sm table-bordered table-hover">
+    <caption class="caption-top">
+      HVLT conversion table
+    </caption>
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">Measured Score HVLT Total T1-T3</th>
+        <th scope="col">Estimated CVLT total</th>
+        <th scope="col">Estimated RAVLT total</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in table3 %}
+      <tr>
+        <td>{{row[0]}}</td>
+        <td>{{row[1]}}</td>
+        <td>{{row[2]}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div> -->
+{% endblock %}
+{% block output %}
+{% if table.size > 0 and scores.size > 3 %}
+<div class="table-responsive col-6">
+  <table id = "output_table" class="table table-md table-bordered table-hover rounded border border-3">
+    <caption class="caption-top">
+      {{ instrument }} {{ item }} equivalent raw scores
+    </caption>
+    <tbody>
+      {% for instrument,score in scores %}
+      <tr>
+        <td class="fw-bold">{{instrument}}</td>
+        <td>{{score}}</td>
+      </tr>
+      <!-- <tr>
+        <td class="fw-bold">{{instrument[1]}}</td>
+        <td>{{score[1]}}</td>
+     </tr>
+     <tr>
+        <td class="fw-bold">{{instrument[2]}}</td>
+        {% if item != "sdfr" %}
+        <td>{{score[2]}}</td>
+        {% endif %}
+      </tr> -->
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<br/>
+<div class="row"><p class="col-6"><em>To derive norms, norm the equivalent raw scores above using the equivalent measure's standard norming procedure.</em></p></div>
+{% endif %}
+{% endblock %}
